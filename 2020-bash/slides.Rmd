@@ -1,0 +1,78 @@
+---
+title: "Bash"
+author: Thomas Preston
+output:
+    ioslides_presentation:
+        logo: images/codethink-swirl.svg
+---
+
+## Bash is rubbish
+- Maybe just say this
+- When should we use Bash
+- When should we not use Bash
+- Running other programs
+
+---
+```{bash, error=T}
+shellcheck -x scripts/bad.sh
+```
+
+<div class="notes">
+- Shellcheck ignore, try not to use this
+- CI
+</div>
+
+## What bash is not
+- Specifically for calling other programs
+- Picture of wires between tools?
+  - Overlay text (Python, C, Bash)
+- Do
+
+- Dont
+  - Processing data
+```{bash, eval=F}
+man bash
+/SHELL BUILTIN COMMANDS
+```
+
+## Shebang
+```{bash, eval=F}
+#!/bin/bash
+#!/usr/bin/env bash
+```
+
+```{bash, eval=F}
+#!/bin/bash -e
+bash -e scripts/bad.sh
+set -e
+```
+
+```{bash, eval=F}
+bash -x scripts/bad.sh
+```
+
+<div class="notes">
+TODO env or bash
+</div>
+
+## Strings
+
+## Functions
+```{bash, eval=F}
+#!/bin/bash
+pr_err()
+{
+	 >&2 echo "Error: $foo"
+}
+
+copy_files()
+{
+	declare dest="$1" # or local
+	rsync -avh --progress=info ts007-build:foo "$dest"
+}
+
+if ! copy_files "bar"; then
+	pr_err "Copy failed"
+	exit 1
+fi
+```
