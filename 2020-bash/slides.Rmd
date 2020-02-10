@@ -1,13 +1,12 @@
 ---
-title: "Bash"
+title: "Know your enemy: Bash"
 author: Thomas Preston
 output:
     ioslides_presentation:
-        logo: images/codethink-swirl.svg
+        logo: ../images/codethink-swirl.svg
 ---
 
-## Bash is rubbish
-- Maybe just say this
+## Two sides
 - When should we use Bash
 - When should we not use Bash
 - Running other programs
@@ -53,6 +52,58 @@ bash -x scripts/bad.sh
 
 <div class="notes">
 TODO env or bash
+</div>
+
+## Globbing
+```{bash, eval=F}
+bash$ ls -l
+total 2
+ -rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 a.1
+ -rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 b.1
+ -rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 c.1
+ -rw-rw-r--    1 bozo  bozo       466 Aug  6 17:48 t2.sh
+ -rw-rw-r--    1 bozo  bozo       758 Jul 30 09:02 test1.txt
+```
+
+## Globbing
+```{bash, eval=F}
+bash$ ls -l t?.sh
+-rw-rw-r--    1 bozo  bozo       466 Aug  6 17:48 t2.sh
+
+bash$ ls -l [ab]*
+-rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 a.1
+-rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 b.1
+
+bash$ ls -l [a-c]*
+-rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 a.1
+-rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 b.1
+-rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 c.1
+
+bash$ ls -l [^ab]*
+-rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 c.1
+-rw-rw-r--    1 bozo  bozo       466 Aug  6 17:48 t2.sh
+-rw-rw-r--    1 bozo  bozo       758 Jul 30 09:02 test1.txt
+```
+
+## Globbing
+```{bash, eval=F}
+bash$ ls -l {b*,c*,*est*}
+-rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 b.1
+-rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 c.1
+-rw-rw-r--    1 bozo  bozo       758 Jul 30 09:02 test1.txt
+
+bash$ ls -l {}
+-rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 b.1
+-rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 c.1
+-rw-rw-r--    1 bozo  bozo       758 Jul 30 09:02 test1.txt
+```
+- https://www.tldp.org/LDP/abs/html/globbingref.html
+
+<div class="notes">
+- Filename expansion
+- Globbing is not Regular Expressions
+- Good: interactive, searching for files
+- Bad: Writing Bash scripts, terrible terrible thing
 </div>
 
 ## Strings
