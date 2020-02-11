@@ -55,7 +55,7 @@ TODO maybe this slide should move
 Buildroot is a tool that **simplifies** and automates the process of building a complete Linux system for an embedded system, using **cross-compilation**.
 
 - It does 💪
-  - Graph package dependencies
+  - Basic dependency graphing
   - Bootstrap a cross-toolchain + host environment
   - Create a rootfs image (BusyBox, kernel, u-boot)
 - It does not 😒
