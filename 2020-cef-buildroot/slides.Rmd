@@ -15,7 +15,7 @@ output:
 - CEF is not in Buildroot
 - Rushed Ubuntu container
 
-```{dot,fig.width=4,fig.align="center",echo=F}
+```{dfig.alignot,fig.width=4,fig.align="center",echo=F}
 digraph {
 	rankdir="LR"
 	webkit [image="images/webkit_520x520.png", label="", shape=none]
@@ -54,18 +54,31 @@ TODO maybe this slide should move
 ## Buildroot: High level
 Buildroot is a tool that **simplifies** and automates the process of building a complete Linux system for an embedded system, using **cross-compilation**.
 
+```{dot,fig.align="center",echo=F}
+digraph {
+	rankdir="LR"
+	node [shape=box]
+	subgraph host {
+		label="Host"
+		Toolchain
+	}
+	host -> Target
+}
+```
+
 - It does 💪
-  - Basic dependency graphing
-  - Bootstrap a cross-toolchain + host environment
   - Create a rootfs image (BusyBox, kernel, u-boot)
+  - Bootstrap a cross-toolchain + host environment
+  - Basic dependency graphing
 - It does not 😒
   - Cache package builds (can use pre-built toolchain)
   - Verify dependencies
   - Build remotely
 
 <div class="notes">
+- rootfs image for target, archive, partitioned disk image
 - Bootstrap a cross-toolchain (glibc, uClibc-ng, musl)
-- Bootstrap from minimal
+- idea is host env is created from Buildroot packages
 </div>
 
 ## Buildroot: menuconfig
@@ -153,6 +166,7 @@ output/host/lib/libyaml.so
 ## Chromium Embedded Framework
 - Project layout
 - Ninja
+	- http://neugierig.org/software/chromium/notes/2011/02/ninja.html
 - CEF Python
 - V8 Snapshot
 
