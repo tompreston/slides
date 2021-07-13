@@ -7,3 +7,4 @@ Slides and materials for presentations
 * [ ] Repo
 * [ ] Bash
 * [ ] Device Tree
+* [ ] tmate
