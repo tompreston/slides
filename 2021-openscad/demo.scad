@@ -1,0 +1,104 @@
+/* OpenSCAD Demo - Thomas Preston
+ *
+ * https://openscad.org/documentation.html
+ * https://openscad.org/cheatsheet/index.html
+ * https://github.com/sirtaj/vim-openscad
+ */
+
+/* 3D Primitives */
+/*
+//cube(10);
+cube([5, 10, 20]);
+sphere(10);
+*/
+
+/* Transformations */
+/*
+translate([20, 0, 0]) cube(10);
+rotate([0, 20, 30]) cube(10);
+
+translate([20, 0, 0]) rotate([0, 20, 30]) cube(10);
+rotate([0, 20, 30]) translate([20, 0, 0]) cube(10);
+*/
+
+/* Modifiers
+  * disable
+  ! show only
+  # highlight / debug
+  % transparent / background
+*/
+
+/* Formatting */
+/*
+rotate([0, 20, 30])
+    translate([20, 0, 0])
+    cube(10);
+*/
+
+/* Loops */
+/*
+num_cubes = 5;
+r = 20;
+cube_len = 5;
+
+for (i = [0:num_cubes]) {
+    echo(str("Plot cube ", i));
+    rotate([0, i * 360 / num_cubes, 0])
+        translate([r, 0, 0])
+        cube(cube_len, center=true);
+}
+*/
+
+/* Boolean operations. */
+/*
+union()
+difference()
+intersection()
+*/
+/*
+*/
+cube_l = 20;
+cube_w = 10;
+cube_h = 10;
+
+hole_pos_l = 10;
+hole_pos_h = 5;
+hole_r = 3;
+
+difference() {
+    cube([cube_l, cube_w, cube_h]);
+    translate([hole_pos_l, 0, hole_pos_h]) 
+        rotate([-90, 0, 0]) 
+        cylinder(cube_w, r=hole_r);
+}
+
+/* Functions */
+/*
+function inch2mm(i) = i * 25.4;
+
+cube(inch2mm(2));
+*/
+
+/* Modules */
+/*
+module house(roof="flat", paint=[1,0,0]) {
+    color(paint)
+    if (roof=="flat") {
+        translate([0,-1,0]) cube();
+    } else if (roof=="pitched") {
+        rotate([90,0,0])
+            linear_extrude(height=1)
+            polygon(points=[[0,0],[0,1],[0.5,1.5],[1,1],[1,0]]);
+    }
+    else if (roof=="domical") {
+        translate([0,-1,0]) {
+            translate([0.5,0.5,1])
+                sphere(r=0.5,$fn=20);
+            cube(); 
+        }
+    }
+}
+*/
+
+house("pitched");
+translate([2, 0, 0]) house("domical");
